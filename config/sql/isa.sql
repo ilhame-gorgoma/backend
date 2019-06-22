@@ -40,14 +40,16 @@ CREATE TABLE article(
         id           Int  Auto_increment  NOT NULL ,
         author       Varchar (150) NOT NULL ,
         title        Varchar (255) NOT NULL ,
+        description  Text NOT NULL ,
         content      Longtext NOT NULL ,
         dateCreation TimeStamp NOT NULL ,
         date         Date NOT NULL ,
         image        Varchar (255) NOT NULL ,
-        id_user      Int NOT NULL
+        id_user      Int NULL
 	,CONSTRAINT article_PK PRIMARY KEY (id)
 
 	,CONSTRAINT article_user_FK FOREIGN KEY (id_user) REFERENCES user(id)
+        ON DELETE SET NULL
 )ENGINE=InnoDB;
 
 
@@ -64,9 +66,10 @@ CREATE TABLE cause(
         dateEnd      Date NOT NULL ,
         status       Bool NOT NULL ,
         image        Varchar (255) NOT NULL ,
-        id_user      Int NOT NULL
+        id_user      Int NULL
 	,CONSTRAINT cause_PK PRIMARY KEY (id)
 
 	,CONSTRAINT cause_user_FK FOREIGN KEY (id_user) REFERENCES user(id)
+        ON DELETE SET NULL
 )ENGINE=InnoDB;
 

@@ -4,6 +4,7 @@ class cause extends database
     public $id;
     public $title;
     public $content;
+    public $description;
     public $dateCreation;
     public $dateEnd;
     public $status;
@@ -19,9 +20,10 @@ class cause extends database
      * @return boolean
      */
     public function addCause(){
-        $prepare = $this -> db -> prepare("INSERT INTO `cause`(`title`, `content`, `dateCreation`, `dateEnd`, `status`, `image`) VALUES (:title, :content, :dateCreation, :dateEnd, :status, :image)");
+        $prepare = $this -> db -> prepare("INSERT INTO `cause`(`title`, `content`, `description`, `dateCreation`, `dateEnd`, `status`, `image`) VALUES (:title, :content, :description, :dateCreation, :dateEnd, :status, :image)");
         $prepare -> bindValue(':title', $this -> title, PDO::PARAM_STR);
         $prepare -> bindValue(':content', $this -> content, PDO::PARAM_STR);
+        $prepare -> bindValue(':description', $this -> description, PDO::PARAM_STR);
         $prepare -> bindValue(':dateCreation', $this -> dateCreation, PDO::PARAM_STR);
         $prepare -> bindValue(':dateEnd', $this -> dateEnd, PDO::PARAM_STR);
         $prepare -> bindValue(':status', $this -> status, PDO::PARAM_INT);
@@ -59,10 +61,11 @@ class cause extends database
      * @return boolean
      */
     public function updateArticle(){
-        $prepare = $this -> db -> prepare('UPDATE `cause` SET `title`=:title,`content`=:content,`dateCreation`=:dateCreation,`dateEnd`=:dateEnd,`status`=:status, `image`=:image
+        $prepare = $this -> db -> prepare('UPDATE `cause` SET `title`=:title,`content`=:content,`dateCreation`=:dateCreation, `description`=:description, `dateEnd`=:dateEnd,`status`=:status, `image`=:image
         WHERE id=:id');
         $prepare -> bindValue(':title', $this -> title, PDO::PARAM_STR);
         $prepare -> bindValue(':content', $this -> content, PDO::PARAM_STR);
+        $prepare -> bindValue(':description', $this -> description, PDO::PARAM_STR);
         $prepare -> bindValue(':dateCreation', $this -> dateCreation, PDO::PARAM_STR);
         $prepare -> bindValue(':dateEnd', $this -> dateEnd, PDO::PARAM_STR);
         $prepare -> bindValue(':image', $this -> image, PDO::PARAM_STR);

@@ -26,16 +26,7 @@ if (isset($_GET['id'])) {
 
 // MAKE SQL QUERY
 // IF GET POSTS ID, THEN SHOW POSTS BY ID OTHERWISE SHOW ALL POSTS
-$sql = is_numeric($post_id) ? "SELECT
-cause.id, cause.title, cause.content, cause.status, cause.dateCreation, imagecause.id_cause, imagecause.imageLink
-FROM cause
-INNER JOIN
-imagecause ON cause.id = imagecause.id_cause
-WHERE cause.id = '$post_id'" : "SELECT
-cause.id, cause.title, cause.content, cause.status, cause.dateCreation, imagecause.id_cause, imagecause.imageLink
-FROM cause
-INNER JOIN
-imagecause ON cause.id = imagecause.id_cause";
+$sql = is_numeric($post_id) ? "SELECT * FROM cause WHERE id =".$post_id : "SELECT * FROM cause";
 
 $stmt = $conn->prepare($sql);
 
@@ -50,11 +41,14 @@ if ($stmt->rowCount() > 0) {
 
         $post_data = [
             'id' => $row['id'],
+            'id_user' => $row['id_user'],
             'title' => $row['title'],
             'content' => html_entity_decode($row['content']),
-            'date' => $row['dateCreation'],
+            'description' => html_entity_decode($row['description']),
+            'dateCreation' => $row['dateCreation'],
+            'dateEnd' => $row['dateEnd'],
             'status' => $row['status'],
-            'imageLink' => $row['imageLink']
+            'image' => $row['image']
         ];
         // PUSH POST DATA IN OUR $posts_array ARRAY
         array_push($posts_array, $post_data);

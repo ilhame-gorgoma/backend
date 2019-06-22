@@ -38,8 +38,10 @@ if($stmt->rowCount() > 0){
         
         $post_data = [
             'id' => $row['id'],
+            'id_user' => $row['id_user'],
             'title' => $row['title'],
             'content' => html_entity_decode($row['content']),
+            'description' => html_entity_decode($row['description']),
             'date' => $row['date'],
             'author' => $row['author'],
             'image' => $row['image']

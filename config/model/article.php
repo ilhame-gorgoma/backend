@@ -5,6 +5,7 @@ class article extends database
     public $title;
     public $author;
     public $content;
+    public $description;
     public $date;
     public $image;
     public $id_user;
@@ -18,10 +19,11 @@ class article extends database
      * @return boolean
      */
     public function addArticle(){
-        $prepare = $this -> db -> prepare("INSERT INTO `article`(`title`, `author`, `content`, `date`, `image`) VALUE(:title, :author, :content, :date, :image)");
+        $prepare = $this -> db -> prepare("INSERT INTO `article`(`title`, `author`, `content`, `description`, `date`, `image`) VALUE(:title, :author, :content, :description :date, :image)");
         $prepare -> bindValue(':title', $this -> title, PDO::PARAM_STR);
         $prepare -> bindValue(':author', $this -> author, PDO::PARAM_STR);
         $prepare -> bindValue(':content', $this -> content, PDO::PARAM_STR);
+        $prepare -> bindValue(':description', $this -> description, PDO::PARAM_STR);
         $prepare -> bindValue(':date', $this -> date, PDO::PARAM_STR);
         $prepare -> bindValue(':image', $this -> image, PDO::PARAM_STR);
         if($prepare -> execute()){
@@ -69,10 +71,11 @@ class article extends database
      * @return boolean
      */
     public function updateArticle(){
-        $prepare = $this -> db -> prepare('UPDATE `article` SET `title` = :title, `author` = :author, `content` = :content, date = :date, `image` = :image WHERE `id` = :id');
+        $prepare = $this -> db -> prepare('UPDATE `article` SET `title` = :title, `author` = :author, `content` = :content, description = :description, date = :date, `image` = :image WHERE `id` = :id');
         $prepare -> bindValue(':title', $this -> title, PDO::PARAM_STR);
         $prepare -> bindValue(':author', $this -> author, PDO::PARAM_STR);
         $prepare -> bindValue(':content', $this -> content, PDO::PARAM_STR);
+        $prepare -> bindValue(':description', $this -> description, PDO::PARAM_STR);
         $prepare -> bindValue(':date', $this -> date, PDO::PARAM_STR);
         $prepare -> bindValue(':image', $this -> image, PDO::PARAM_STR);
         $prepare -> bindValue(':id', $this -> id, PDO::PARAM_INT);
