@@ -19,7 +19,7 @@ class article extends database
      * @return boolean
      */
     public function addArticle(){
-        $prepare = $this -> db -> prepare("INSERT INTO `article`(`title`, `author`, `content`, `description`, `date`, `image`) VALUE(:title, :author, :content, :description :date, :image)");
+        $prepare = $this -> db -> prepare("INSERT INTO `article`(`title`, `author`, `content`, `description`, `date`, `image`) VALUE(:title, :author, :content, :description, :date, :image)");
         $prepare -> bindValue(':title', $this -> title, PDO::PARAM_STR);
         $prepare -> bindValue(':author', $this -> author, PDO::PARAM_STR);
         $prepare -> bindValue(':content', $this -> content, PDO::PARAM_STR);

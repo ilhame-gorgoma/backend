@@ -10,6 +10,7 @@ require_once '../controller/addArticleController.php';
 <form action="" method="post" enctype="multipart/form-data">
     <input type="text" name="title">
     <input type="text" name="author">
+    <input type="text" name="description">
     <textarea name="content" cols="30" rows="10"></textarea>
     <input type="date" name="date">
     <input type="file" name="image" id="image">

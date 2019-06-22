@@ -1,7 +1,7 @@
 <?php
 class database{
     
-    private $db_host = 'localhost';
+    private $db_host = 'internationalsolidarityafrica';
     private $db_name = 'test';
     private $db_username = 'root';
     private $db_password = '';

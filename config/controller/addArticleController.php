@@ -3,21 +3,21 @@ require_once "../model/dbConnect.php";
 require_once "../model/article.php";
 
 // Constantes
-define('TARGET', '../../../frontend/src/assets/img/article/');    // Repertoire cible
+define('TARGET', '../../../frontend/src/assets/img/articleImg/');    // Repertoire cible
 define('MAX_SIZE', 100000);    // Taille max en octets du fichier
 // Tableaux de donnees
 $tabExt = array('jpg', 'gif', 'png', 'jpeg');    // Extensions autorisees
 $infosImg = array();
-
 $nomImage;
 
 if (isset($_POST['addArticle'])) {
     $article = new article();
-    if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_FILES['image']['name']) && !empty($_POST['content']) && !empty($_POST['date'])) {
+    if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_FILES['image']['name']) && !empty($_POST['content']) && !empty($_POST['date']) && !empty($_POST['description'])) {
         $title = htmlspecialchars($_POST['title']);
         $author = htmlspecialchars($_POST['author']);
         $content = htmlspecialchars($_POST['content']);
         $date = htmlspecialchars($_POST['date']);
+        $description = htmlspecialchars($_POST['description']);
 
         $extension  = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         if (in_array(strtolower($extension), $tabExt)) {
@@ -44,6 +44,7 @@ if (isset($_POST['addArticle'])) {
         $article->author = $author;
         $article->content = $content;
         $article->date = $date;
+        $article->description = $description;
         $article->image = $image;
         if ($article->addArticle()) {
             $error = "success";
